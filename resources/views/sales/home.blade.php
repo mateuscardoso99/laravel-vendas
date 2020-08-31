@@ -74,10 +74,19 @@
                 </tbody>
                 @endforeach
             </table>
+
+            @foreach($errors->all() as $message)
+                <div class="alert alert-danger text-center" role="alert">
+                    <strong>{{$message}}</strong>
+                </div>
+            @endforeach
+            
         </div>
     </div>
 </div>
+
 @endsection
+
 
 <div class="modal fade" id="ModalCreateVenda" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -94,7 +103,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="description">Descrição</label>
-                        <input type="text" class="form-control" name="description" id="description" required>
+                        <input type="text" class="form-control" name="description" id="description">
                     </div>
 
                     <div class="form-group">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Http\Requests\SaleRequest;
 
 class SalesController extends Controller
 {
@@ -34,8 +35,8 @@ class SalesController extends Controller
     	return view('sales.create');
     }*/
 
-    public function store(Request $req){
-    	$data = $req->all();
+    public function store(SaleRequest $req){
+        $data = $req->validated();
     	$sale = Sales::create([
 	    	'description' => $data['description'],
 		    'products' => $data['products'],
@@ -53,7 +54,7 @@ class SalesController extends Controller
         return view('sales.update',['sale'=>$sale]);
     }
 
-    public function update(Sales $sale, Request $req){
+    public function update(Sales $sale, SaleRequest $req){
         $sale = Sales::find($req->id);
         $sale->description = $req->description;
         $sale->products = $req->products;
